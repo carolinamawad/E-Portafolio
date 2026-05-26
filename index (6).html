@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Portfolio | Technology in Foreign Language Teaching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070b14;
+      --bg2: #0d1525;
+      --bg3: #111d35;
+      --accent: #00d4ff;
+      --accent2: #7b61ff;
+      --accent3: #ff6b6b;
+      --gold: #f5c842;
+      --text: #e8edf5;
+      --muted: #8b9ab5;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(0,212,255,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND GRID ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(7,11,20,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+    .orb1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      animation: pulse 6s ease-in-out infinite;
+    }
+    .orb2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(123,97,255,0.1) 0%, transparent 70%);
+      bottom: 0; right: -100px;
+      animation: pulse 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+    }
+    .orb2 { animation: pulse2 8s ease-in-out infinite reverse; }
+    @keyframes pulse2 {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.1); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 100px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero-badge span { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-title .grad {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-course {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-names {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .name-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.8rem;
+      text-align: center;
+    }
+
+    .name-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .name-card .name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .hero-meta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+
+    .hero-meta span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-meta .dot { color: var(--accent); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 1s ease both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.6); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0 2rem;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .card:hover {
+      border-color: rgba(0,212,255,0.35);
+      transform: translateY(-3px);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* ── PHASE TAG ── */
+    .phase-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+    }
+    .phase-tag.p1 { background: rgba(245,200,66,0.1); border: 1px solid rgba(245,200,66,0.3); color: var(--gold); }
+    .phase-tag.p2 { background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: var(--accent); }
+    .phase-tag.p3 { background: rgba(123,97,255,0.1); border: 1px solid rgba(123,97,255,0.3); color: var(--accent2); }
+    .phase-tag.p4 { background: rgba(255,107,107,0.1); border: 1px solid rgba(255,107,107,0.3); color: var(--accent3); }
+    .phase-tag.p5 { background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: var(--accent); }
+
+    /* ── INFOGRAPHIC EMBED ── */
+    .infographic-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .infographic-content {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .infographic-visual {
+      background: linear-gradient(135deg, #1a0533 0%, #0d1525 100%);
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .info-block {
+      background: rgba(123,97,255,0.08);
+      border: 1px solid rgba(123,97,255,0.2);
+      border-radius: 12px;
+      padding: 1.2rem;
+    }
+
+    .info-block h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #c4b5fd;
+      margin-bottom: 0.4rem;
+    }
+
+    .info-block p {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      line-height: 1.55;
+    }
+
+    /* ── REFLECTION TEXT ── */
+    .reflection-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .reflection-box h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+      color: var(--accent);
+    }
+
+    .reflection-box p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .reflection-box p:last-child { margin-bottom: 0; }
+
+    /* ── LESSON PLAN CARD ── */
+    .lesson-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .lesson-header {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .lesson-header h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    .lesson-body {
+      padding: 2rem 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .lesson-meta-item .meta-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .lesson-meta-item .meta-val {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ── VIDEO EMBED ── */
+    .video-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      aspect-ratio: 16/9;
+      margin-top: 1.5rem;
+    }
+
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── LINK BUTTON ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      background: #00b8d9;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.25);
+      color: var(--accent);
+    }
+    .btn-ghost:hover {
+      background: rgba(0,212,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .btn-purple {
+      background: rgba(123,97,255,0.12);
+      border: 1px solid rgba(123,97,255,0.3);
+      color: var(--accent2);
+    }
+    .btn-purple:hover {
+      background: rgba(123,97,255,0.22);
+      transform: translateY(-2px);
+    }
+
+    /* ── ESSAY ── */
+    .essay-container {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .essay-header {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .essay-body {
+      padding: 2.5rem;
+    }
+
+    .essay-para {
+      margin-bottom: 2rem;
+    }
+
+    .essay-para-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .essay-para p {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    /* ── LABINNOVA ── */
+    .labinnova-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .labinnova-table th {
+      background: rgba(0,212,255,0.06);
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .labinnova-table td {
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      line-height: 1.6;
+      vertical-align: top;
+    }
+
+    .labinnova-table tr:last-child td { border-bottom: none; }
+    .labinnova-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .labinnova-table .item-num {
+      color: var(--accent);
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+    }
+
+    .labinnova-table .item-name {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── DIGITAL RESOURCE ── */
+    .resource-showcase {
+      background: linear-gradient(135deg, var(--bg2), var(--bg3));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .resource-preview {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+
+    .resource-preview iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer .footer-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+    }
+
+    footer .footer-accent { color: var(--accent); }
+
+    /* ── TABS ── */
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .tab-btn {
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(0,212,255,0.1);
+      border-color: rgba(0,212,255,0.3);
+      color: var(--accent);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── SKILLS CHIPS ── */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .chip {
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(123,97,255,0.1);
+      border: 1px solid rgba(123,97,255,0.2);
+      color: var(--accent2);
+    }
+
+    .chip.cyan {
+      background: rgba(0,212,255,0.08);
+      border-color: rgba(0,212,255,0.2);
+      color: var(--accent);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -2.3rem;
+      top: 0.3rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .tl-item h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tl-item p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    /* ── VIDEO LINK CARD ── */
+    .video-link-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-top: 1.5rem;
+    }
+    .video-link-card:hover {
+      border-color: rgba(0,212,255,0.35);
+      transform: translateY(-2px);
+    }
+    .video-link-card .play-icon {
+      width: 50px; height: 50px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .video-link-card .vid-info .vid-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+    .video-link-card .vid-info .vid-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .video-link-card .vid-info .vid-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .infographic-wrap { grid-template-columns: 1fr; }
+      .resource-showcase { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#hero">EFL · E-Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#phase1">Phase 1</a></li>
+    <li><a href="#phase2">Phase 2</a></li>
+    <li><a href="#phase3">Phase 3</a></li>
+    <li><a href="#phase4">Phase 4</a></li>
+    <li><a href="#phase5">Phase 5</a></li>
+    <li><a href="#labinnova">LabINNOVA</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+
+  <div class="hero-badge"><span></span> UNAD · Escuela de Ciencias de la Educación</div>
+
+  <h1 class="hero-title">
+    Technology in<br/>
+    <span class="grad">Foreign Language</span><br/>
+    Teaching
+  </h1>
+
+  <p class="hero-course">Course 518006 · Licenciatura en Lenguas Extranjeras con Énfasis en Inglés</p>
+
+  <div class="hero-names">
+    <div class="name-card">
+      <div class="label">Student</div>
+      <div class="name">Diana Carolina Acevedo Mouawd</div>
+    </div>
+    <div class="name-card">
+      <div class="label">Student</div>
+      <div class="name">Richard Jesús Riaño Peña</div>
+    </div>
+  </div>
+
+  <div class="hero-meta">
+    <span><span class="dot">◆</span> Support Teacher: Valeria María Eraso Ibarra</span>
+    <span><span class="dot">◆</span> Group: Starters Kids Pre-A1</span>
+    <span><span class="dot">◆</span> 2026</span>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Explore
+  </div>
+</div>
+
+<!-- ── PHASE 1 · INFOGRAPHIC ── -->
+<div class="divider"></div>
+<section id="phase1">
+  <div class="section-label">Phase 1</div>
+  <h2 class="section-title">The Role of Technology<br/>in EFL Settings</h2>
+  <p class="section-desc">
+    An infographic exploring the evolution of technology in English as a Foreign Language teaching, from foundational digital tools to virtual environments, gamification, and current challenges in the classroom.
+  </p>
+
+  <div class="infographic-wrap">
+    <div class="infographic-content">
+      <div class="phase-tag p1">📊 Phase 1 · Infographic</div>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:1.2rem;">The Role of Technology in EFL Settings</h3>
+      <p style="color:var(--muted);font-size:0.92rem;line-height:1.75;margin-bottom:1.5rem;">
+        This infographic presents a comprehensive visual overview of how technology has transformed English as a Foreign Language teaching. It traces the evolution from Computer-Assisted Language Learning (CALL) to Mobile-Assisted Language Learning (MALL) and Technology-Enhanced Language Learning (TELL), while addressing practical classroom realities.
+      </p>
+      <div class="chips">
+        <span class="chip cyan">CALL → MALL → TELL</span>
+        <span class="chip">Google Classroom</span>
+        <span class="chip">VR / AR</span>
+        <span class="chip cyan">Gamification</span>
+        <span class="chip">Digital Divide</span>
+        <span class="chip cyan">Active Learning</span>
+      </div>
+    </div>
+
+    <div class="infographic-visual">
+      <div class="info-block">
+        <h4>📱 Foundation of Digital Learning</h4>
+        <p>Technology has evolved from simple computer exercises to mobile apps and fully integrated environments that allow learning anywhere, at any time — from CALL to MALL to TELL.</p>
+      </div>
+      <div class="info-block">
+        <h4>🌐 Virtual Environments & Resources</h4>
+        <p>LMS tools like Google Classroom help organize lessons, while virtual and augmented reality provide immersive spaces to practice in real-world scenarios.</p>
+      </div>
+      <div class="info-block">
+        <h4>🎮 Impact & Instructional Strategies</h4>
+        <p>Gamification increases student motivation. These strategies encourage active learning where students take control of their own progress rather than simply listening to lectures.</p>
+      </div>
+      <div class="info-block">
+        <h4>⚠️ Current Challenges</h4>
+        <p>While technology is helpful, challenges like poor internet connectivity and distractions from social media remain barriers that educators must navigate thoughtfully.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <p style="color:var(--muted);font-size:0.78rem;margin-bottom:1rem;">Key References · Phase 1</p>
+    <div class="card-grid">
+      <div class="card" style="padding:1.2rem;">
+        <p style="font-size:0.82rem;line-height:1.6;">Al-Ansi et al. (2023). Analyzing augmented reality (AR) and virtual reality (VR) recent development in education. <em>Social Sciences & Humanities Open, 8</em>(1).</p>
+      </div>
+      <div class="card" style="padding:1.2rem;">
+        <p style="font-size:0.82rem;line-height:1.6;">Aleksius et al. (2022). Exploring EFL students' perceptions of Google Classroom as a learning management system. <em>VELES, 6</em>(1).</p>
+      </div>
+      <div class="card" style="padding:1.2rem;">
+        <p style="font-size:0.82rem;line-height:1.6;">Hashim et al. (2023). TEALL: Technology-Enhanced Active Language Learning. <em>Creative Education, 14.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHASE 2 · REFLECTION ── -->
+<div class="divider"></div>
+<section id="phase2">
+  <div class="section-label">Phase 2</div>
+  <h2 class="section-title">Educational Setting &<br/>Methodology Reflection</h2>
+  <p class="section-desc">
+    A written reflection on the educational context, learner profiles, novel teaching methodologies, and the role of technology tools selected to address the needs of young EFL learners.
+  </p>
+
+  <div class="phase-tag p2">📝 Phase 2 · Reflection</div>
+
+  <div class="reflection-box">
+    <h3>Educational Setting & Learner Profile</h3>
+    <p>
+      Students aged 9–12 at Starskids show consistent improvement in English language skills. They are familiar with common vocabulary, understand basic grammar, respond well to instructions given in the classroom, and are active participants in play-based activities at the A1–A2 level. Their strengths show a positive attitude towards learning and a foundation for developing more effective responses in the form of sentences.
+    </p>
+    <p>
+      The chosen educational setting is an English private school with students aged between 5 and 8 years old at the A1 level. At this level, students are able to identify basic vocabulary and relate it with the use of images, understand basic sentences, and follow instructions. Students are mostly fond of playing and listening to music and are drawn to colorful materials. One of the major challenges the students face is speaking — they mostly repeat vocabulary rather than forming full sentences. However, they are good at listening and responding well when exposed to familiar vocabulary. The room is equipped with a computer, internet connection, a projector, and sometimes tablets.
+    </p>
+  </div>
+
+  <div class="reflection-box">
+    <h3>Novel Methodology: Task-Based Intercultural Learning + Flipped Classroom</h3>
+    <p>
+      To address these needs, Task-Based Intercultural Learning (TBIL) was combined with the Flipped Classroom method. TBIL is based on the use of meaningful tasks that link language with real-life and cultural contexts (Cai, 2024; Wang, 2004). Students learn vocabulary and simple phrases at home using videos or simple games, then participate in speaking tasks in class. This gives the class more time for student interaction and practice, which is essential for young learners. As suggested by Francl (2014), flipped learning is effective when used for active learning and engagement in face-to-face sessions.
+    </p>
+  </div>
+
+  <div class="reflection-box">
+    <h3>Technology Tools: Wordwall & Quizlet</h3>
+    <p>
+      For technology use, Wordwall and Quizlet were identified as effective tools for learning. Wordwall was used to develop interactive games for learning and practicing vocabulary and listening through matching games or speaking tasks. Quizlet was used for learning and practicing vocabulary through flashcards and games that support reading and listening. These tools were effective for young learners since they include visuals that help them learn and remember. According to König et al. (2022), the use of ICT in class can increase students' engagement and cater to students with different learning styles. The tools therefore help students progress from identifying language to using it with confidence in speaking activities.
+    </p>
+  </div>
+
+  <div class="chips" style="margin-top:1rem;">
+    <span class="chip cyan">TBIL</span>
+    <span class="chip cyan">Flipped Classroom</span>
+    <span class="chip">Wordwall</span>
+    <span class="chip">Quizlet</span>
+    <span class="chip cyan">Pre-A1 · A1 Learners</span>
+    <span class="chip">ICT Integration</span>
+  </div>
+</section>
+
+<!-- ── PHASE 3 · LESSON PLAN 1 ── -->
+<div class="divider"></div>
+<section id="phase3">
+  <div class="section-label">Phase 3</div>
+  <h2 class="section-title">Lesson Plan 1 &<br/>Video Evidence</h2>
+  <p class="section-desc">
+    A flipped classroom and task-based lesson plan for A1 learners (ages 5–8) focused on talking about home and family, with paired role-play and listening activities.
+  </p>
+
+  <div class="phase-tag p3">📚 Phase 3 · Lesson Plan 1</div>
+
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div>
+        <h3>Talking About Home and Family</h3>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.3rem;">Flipped Classroom + Task-Based Intercultural Learning</p>
+      </div>
+      <div class="chips">
+        <span class="chip cyan">A1 Level</span>
+        <span class="chip">Ages 5–8</span>
+        <span class="chip cyan">Speaking & Listening</span>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <div class="lesson-meta-item">
+        <div class="meta-label">Learning Objective</div>
+        <div class="meta-val">Students will identify and pronounce basic vocabulary related to home life (family members, rooms, objects) and ask/answer simple questions using "Where is…?" and "Who is…?"</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Learning Outcome</div>
+        <div class="meta-val">Students present a simple map of their house and introduce family members and rooms using basic English vocabulary during a role-play activity.</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Approach & Methodology</div>
+        <div class="meta-val">Flipped Classroom + Task-Based Intercultural Learning (TBIL). Pre-class video watch, in-class pair role-play (Visitor/Host), listening quiz, and mini-whiteboard activities.</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Target Vocabulary</div>
+        <div class="meta-val">mom, dad, brother, sister, kitchen, bedroom, table, chair, bed — using "This is the kitchen." / "My mom is in the kitchen."</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Key Technology</div>
+        <div class="meta-val">Google Classroom (LMS), YouTube pre-class video, Flashcards, Home Map Worksheet, Audio recordings, Mini-whiteboards</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Assessment</div>
+        <div class="meta-val">Role-play speaking test (40%) · Listening quiz (30%) · Mini-whiteboard activity (20%) · Reflection participation (10%)</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;">
+    <div class="section-label" style="margin-bottom:1rem;">Pre-Task · Flipped Classroom</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <h4>Pre-Class (Home)</h4>
+        <p>Students watch a short video about rooms in a house and family members, repeat vocabulary words, and draw a simple picture of their house and family members to bring to class.</p>
+      </div>
+      <div class="tl-item">
+        <h4>During Task (In Class)</h4>
+        <p>Teacher introduces objective and vocabulary using flashcards. Students review through a circle game. Problem scenario introduced: "Your friend from another country is visiting your house. Show them your home in English." Students work in pairs (Visitor / Host) using a Home Map Worksheet.</p>
+      </div>
+      <div class="tl-item">
+        <h4>Report</h4>
+        <p>Each pair shares their home map role-play with the class, explaining rooms, objects, and who is in each room.</p>
+      </div>
+      <div class="tl-item">
+        <h4>Post-Task</h4>
+        <p>Listening quiz: students hear sentences and choose the correct picture. Teacher provides feedback on pronunciation, vocabulary use, and sentence formation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;">
+    <div class="section-label" style="margin-bottom:1rem;">Video Evidence · Phase 3</div>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/pM85zauYgmY"
+        title="Phase 3 Lesson Video Evidence"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHASE 4 · LESSON PLANS 2 & 3 ── -->
+<div class="divider"></div>
+<section id="phase4">
+  <div class="section-label">Phase 4</div>
+  <h2 class="section-title">Lesson Plans 2 & 3,<br/>Reflection & Video</h2>
+  <p class="section-desc">
+    Two lesson plans centered on colors and classroom objects for Pre-A1 young learners, along with a reflective journal covering personal learning, AI tool evaluation, collaborative work, and lesson delivery.
+  </p>
+
+  <!-- Lesson Plan 2 -->
+  <div class="phase-tag p4">📚 Lesson Plan 2 · Colors</div>
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div>
+        <h3>Colors — Gamified Learning</h3>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.3rem;">Flipped Classroom + Task-Based Intercultural Learning · 120 minutes</p>
+      </div>
+      <div class="chips">
+        <span class="chip">Pre-A1</span>
+        <span class="chip cyan">Starters Kids</span>
+        <span class="chip">April 18, 2026</span>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <div class="lesson-meta-item">
+        <div class="meta-label">SMART Objective</div>
+        <div class="meta-val">By the end of 120 minutes, students will identify and orally name at least 4 basic colors (red, blue, yellow, green, pink, white, black, orange, purple) through interactive digital and physical activities with 80% accuracy.</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Digital Tools</div>
+        <div class="meta-val">Google Classroom · Wordwall (memory game) · Kahoot (gamified assessment) · Sheppard Software (drag-and-drop) · Plays.org (color game)</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Physical Materials</div>
+        <div class="meta-val">Hula hoops (color sorting circles) · Flashcards · Plastic animals & colored blocks/balls</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Assessment</div>
+        <div class="meta-val">Kahoot Quiz: minimum 5/9 correct (80% target) · "I See Colors!" Production Task: students correctly name at least 5 colors independently · 3-point teacher checklist per student</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson Plan 3 -->
+  <div class="phase-tag p4" style="margin-top:2rem;">📚 Lesson Plan 3 · Colors & Classroom Objects</div>
+  <div class="lesson-card">
+    <div class="lesson-header">
+      <div>
+        <h3>Colors & Classroom Objects — AI-Supported</h3>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.3rem;">Multisensory Learning (See–Hear–Say) + Task-Based Learning + AI Interaction · 60 minutes</p>
+      </div>
+      <div class="chips">
+        <span class="chip">Pre-A1</span>
+        <span class="chip cyan">May 12, 2026</span>
+        <span class="chip">ChatGPT</span>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <div class="lesson-meta-item">
+        <div class="meta-label">SMART Objective</div>
+        <div class="meta-val">Students identify and describe classroom objects and colors using "It's a/an + object. It's + color." through See–Hear–Say activities and AI-supported interaction with at least 80% accuracy.</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Technology Integration</div>
+        <div class="meta-val">See–It–Hear–It–Say–It website (visual/auditory input) · ChatGPT (AI-supported speaking practice: "What color is your book?") · Teams (virtual classroom platform)</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Flipped Component</div>
+        <div class="meta-val">Before class: short introductory video on colors and classroom objects, link to See–It–Hear–It–Say–It, and vocabulary list shared through Teams.</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Target Vocabulary</div>
+        <div class="meta-val">Colors: red, blue, green, yellow, black · Objects: book, chair, table, pencil · Structures: "It's [color]." / "What color is it?" / "I see [color]!"</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Assessment</div>
+        <div class="meta-val">Formative: teacher observation during Activities 4, 5, 6; ChatGPT interaction monitoring. Summative: final oral production — students describe at least 2–3 classroom objects with correct colors independently (80% accuracy target).</div>
+      </div>
+      <div class="lesson-meta-item">
+        <div class="meta-label">Problem Anticipation</div>
+        <div class="meta-val">Students may struggle to recall vocabulary or mix up word order. Differences in participation levels expected. Distractions or unfamiliarity with digital tools could reduce engagement.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 4 Reflection -->
+  <div style="margin-top:3rem;">
+    <div class="phase-tag p4">📝 Phase 4 · Reflective Journal</div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab(event,'t1')">Personal Learning</button>
+      <button class="tab-btn" onclick="switchTab(event,'t2')">AI Tool Evaluation</button>
+      <button class="tab-btn" onclick="switchTab(event,'t3')">Collaborative Work</button>
+      <button class="tab-btn" onclick="switchTab(event,'t4')">Lesson Design & Delivery</button>
+    </div>
+
+    <div id="t1" class="tab-content active">
+      <div class="reflection-box">
+        <h3>Personal Learning Experience</h3>
+        <p>Through this teaching experience, I acquired valuable knowledge about the practical use of Artificial Intelligence in language education, particularly in EFL contexts with young learners. One of the most important skills I developed was learning how to integrate AI — not as a replacement for the teacher, but as a tool that supports interaction and speaking practice. Using ChatGPT during the lesson showed how AI can scaffold communication by asking simple, level-appropriate questions and encouraging students to respond confidently.</p>
+        <p>My understanding of AI's role in teaching evolved significantly throughout this task. Initially, I saw AI mainly as a technological resource for content generation. However, after implementing the lesson, I realized that AI can work as an interactive learning tool that increases student engagement and participation. Students were motivated, ready to respond, and less anxious when speaking, which demonstrated that AI can create a supportive environment for language use. When AI is aligned with clear objectives and pedagogy, it becomes a powerful tool to enhance communicative competence rather than just a novelty in the classroom.</p>
+      </div>
+    </div>
+
+    <div id="t2" class="tab-content">
+      <div class="reflection-box">
+        <h3>AI Tool Exploration and Evaluation</h3>
+        <p>During the process of selecting and evaluating the AI tool, different applications were compared based on their suitability for speaking practice, usability, and alignment with learners' needs. ChatGPT was chosen because it allowed flexible, contextualized interaction and could be easily adapted to the learning objectives. Its main strengths are its intuitive interface, immediate responses, and ability to simulate simple conversations that encourage student participation.</p>
+        <p>In practice, ChatGPT proved effective in supporting language learning by reducing students' anxiety and increasing their willingness to speak. Its role as an interactive partner helped students use vocabulary meaningfully rather than mechanically. Clear teacher guidance proved essential to ensure appropriate language level and focus. Overall, the tool had a positive impact on engagement, fluency, and confidence in the EFL classroom.</p>
+      </div>
+    </div>
+
+    <div id="t3" class="tab-content">
+      <div class="reflection-box">
+        <h3>Collaborative Work</h3>
+        <p>The group collaborated closely in designing the rubric, activities, and overall class structure by sharing responsibilities and making joint decisions. Learning objectives were discussed together with a focus on speaking skills through colors and classroom objects. Each member contributed ideas for integrating the See–It–Hear–It–Say–It website and evaluating different AI tools, which helped in designing a clear checklist and selecting ChatGPT as the most suitable option. The rubric was created collaboratively to ensure it assessed pronunciation, participation, and correct use of target expressions.</p>
+        <p>One challenge faced was aligning everyone's ideas into a coherent lesson plan and managing time effectively. However, this was also a success, as open communication and flexibility allowed the group to reach consensus. Overall, teamwork strengthened the quality of the lesson and made the implementation smoother and more effective.</p>
+      </div>
+    </div>
+
+    <div id="t4" class="tab-content">
+      <div class="reflection-box">
+        <h3>Lesson Design and Delivery</h3>
+        <p>Preparing and teaching the class was a positive and meaningful experience, requiring careful planning to align objectives, activities, and technology. Designing the lesson around colors and classroom objects using the See–Hear–Say sequence ensured a clear progression from input to production. During the class, students were highly engaged, confirming that the activities were age-appropriate and well scaffolded.</p>
+        <p>The integration of ChatGPT and the LabINNOVA resource (See–It–Hear–It–Say–It) was highly effective. The website provided strong visual and auditory support for vocabulary acquisition, while ChatGPT enhanced speaking practice by encouraging students to respond to simple questions in a communicative way. This combination reduced anxiety and increased participation, especially during speaking tasks.</p>
+        <p>What worked particularly well was the students' enthusiasm and willingness to interact, as well as the smooth transition between activities. If the lesson were taught again, improvements would include allowing more time for individual AI interaction and preparing backup activities in case of technical issues. Overall, the lesson demonstrated how thoughtful integration of ICT and AI can enhance EFL learning.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 4 Video -->
+  <div style="margin-top:2rem;">
+    <div class="section-label" style="margin-bottom:1rem;">Video Evidence · Phase 4</div>
+    <a class="video-link-card" href="https://unadvirtualedu-my.sharepoint.com/personal/rjrianop_unadvirtual_edu_co/_layouts/15/stream.aspx?id=%2Fpersonal%2Frjrianop%5Funadvirtual%5Fedu%5Fco%2FDocuments%2FRecordings%2FTechnology%20phase%204%2D20260512%5F210105%2DGrabaci%C3%B3n%20de%20la%20reuni%C3%B3n%2Emp4&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&ct=1779759187965&or=WORD%2DWEB%2EBODY%2ENT&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E548aac77%2Dae95%2D4a96%2Dbdcb%2D905f55521d4f" target="_blank" rel="noopener">
+      <div class="play-icon">▶</div>
+      <div class="vid-info">
+        <div class="vid-label">Phase 4 · Lesson Video</div>
+        <div class="vid-title">Technology Phase 4 — Lesson Recording</div>
+        <div class="vid-sub">Colors & Classroom Objects · ChatGPT AI Integration · May 12, 2026 · Click to watch on OneDrive</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ── PHASE 5 · ESSAY ── -->
+<div class="divider"></div>
+<section id="phase5">
+  <div class="section-label">Phase 5</div>
+  <h2 class="section-title">Reflective Essay</h2>
+  <p class="section-desc">
+    A 500–800 word reflective essay analyzing the impact of technological tools on the teaching-learning process with Pre-A1 young learners in an EFL setting.
+  </p>
+
+  <div class="phase-tag p5">✍️ Phase 5 · Reflective Essay</div>
+
+  <div class="essay-container">
+    <div class="essay-header">
+      <div>
+        <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;">The Impact of Technology on EFL Teaching with Young Learners</h3>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.3rem;">Carolina Acevedo Mouawd & Richard Riaño Peña · Course 518006</p>
+      </div>
+      <div class="chips">
+        <span class="chip cyan">ChatGPT</span>
+        <span class="chip">CLT Approach</span>
+        <span class="chip cyan">Pre-A1</span>
+      </div>
+    </div>
+    <div class="essay-body">
+      <div class="essay-para">
+        <div class="essay-para-label">Introduction</div>
+        <p>The integration of technological tools in English as a Foreign Language (EFL) instruction has become increasingly relevant in promoting meaningful and engaging learning experiences. This reflective essay is based on a teaching experience with Pre-A1 young learners, in which a lesson on colors and classroom objects was implemented using a variety of digital and interactive resources. The educational setting involved the use of tools such as the <em>See–It–Hear–It–Say–It</em> website, Google Classroom, and the artificial intelligence tool ChatGPT, all integrated within a communicative and multisensory approach. These technologies were selected to support listening, speaking, and interaction through visual, auditory, and participatory activities adapted to young learners' needs. It is argued that, when used with clear pedagogical objectives, technology significantly enhances language learning by fostering interaction, motivation, and communicative competence among young learners.</p>
+      </div>
+      <div class="essay-para">
+        <div class="essay-para-label">Paragraph 1 · Describing the Experience</div>
+        <p>During the implementation of the lesson, technology played a central role in structuring and delivering instruction. The class was designed for Pre-A1 young learners and focused on teaching colors and classroom objects through a multisensory and communicative approach. The <em>See–It–Hear–It–Say–It</em> website was used to introduce vocabulary through visual and auditory input, allowing students to observe images, listen to pronunciation, and repeat words following a structured see–hear–say sequence. Additionally, ChatGPT was incorporated as an AI tool to facilitate speaking practice by asking simple, contextualized questions such as "What color is your book?" or "What is blue in your classroom?", encouraging students to respond orally using target expressions. One of the most successful experiences with technology was the AI-supported speaking activity, where students actively participated and showed enthusiasm when interacting with the tool. The combination of digital resources and interactive tasks allowed for a dynamic lesson in which students were not only exposed to language input but were also able to practice and produce language in a meaningful and engaging way.</p>
+      </div>
+      <div class="essay-para">
+        <div class="essay-para-label">Paragraph 2 · Analyzing the Impact</div>
+        <p>The integration of technological tools had a significant impact on both student learning and teaching practice, particularly in terms of engagement, interaction, and communicative development. Students showed increased motivation and participation, especially during the AI-supported activity, where they felt encouraged to respond orally in a low-pressure environment. This aligns with research on AI in EFL contexts, which highlights how interactive tools can promote autonomy, immediate feedback, and active language use, enhancing learners' confidence and willingness to speak. From a pedagogical perspective, technology also supported the implementation of a Communicative Language Teaching (CLT) approach, as students were not only exposed to vocabulary but were actively using language in meaningful contexts through guided questions and real-time interaction. However, some challenges emerged: ensuring all students understood how to interact with digital tools required additional scaffolding, and there is a potential risk of overreliance on AI, which may limit critical thinking or reduce teacher–student interaction if not carefully managed. Technical issues, such as connectivity or limited access to devices, can also affect the flow of the lesson.</p>
+      </div>
+      <div class="essay-para">
+        <div class="essay-para-label">Paragraph 3 · Personal Reflection & Conclusion</div>
+        <p>This experience allowed a deeper understanding of how technology can be meaningfully integrated into language teaching, especially with young learners. Tools such as ChatGPT and the <em>See–It–Hear–It–Say–It</em> resource are not simply complementary materials, but powerful elements that can transform the learning environment when aligned with clear pedagogical objectives. The perspective on AI in education changed significantly — it is now seen as an interactive partner that supports communication and reduces students' anxiety, rather than just a tool for content generation. Additionally, the importance of teacher guidance in ensuring that technology remains purposeful and accessible for all learners became clear. If the lesson were implemented again, more structured guidance during digital tool use and additional time for individual AI interaction would be provided, along with alternative activities prepared for technical difficulties. Overall, this experience reinforced that effective technology integration requires careful planning, flexibility, and reflection, strengthening the commitment to using innovative tools to enhance communicative competence in EFL contexts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LABINNOVA ── -->
+<div class="divider"></div>
+<section id="labinnova">
+  <div class="section-label">LabINNOVA</div>
+  <h2 class="section-title">Planning & Checking Form<br/>+ Digital Resource</h2>
+  <p class="section-desc">
+    The Innovation and Excellence Laboratory (LabINNOVA) planning and checking form for the "See It, Hear It, Say It!" interactive English learning resource for young learners, along with the live digital resource.
+  </p>
+
+  <!-- Digital Resource Showcase -->
+  <div class="resource-showcase" style="margin-bottom:3rem;">
+    <div>
+      <div class="phase-tag p5" style="margin-bottom:1.5rem;">🌐 Live Digital Resource</div>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;margin-bottom:1rem;">See It, Hear It, Say It!</h3>
+      <p style="color:var(--muted);font-size:0.92rem;line-height:1.75;margin-bottom:1.5rem;">
+        An interactive English learning resource for young learners (ages 2–5) designed to support early English language development through three foundational skill areas: listening, speaking, and pre-writing motor skills. Content is presented through songs, repetition, visuals, and simple interactions — making learning natural and enjoyable.
+      </p>
+      <div class="chips" style="margin-bottom:1.5rem;">
+        <span class="chip cyan">Listening</span>
+        <span class="chip cyan">Speaking</span>
+        <span class="chip">Pre-Writing Skills</span>
+        <span class="chip cyan">Play-Based</span>
+        <span class="chip">Ages 2–5</span>
+        <span class="chip cyan">Gamified</span>
+      </div>
+      <a class="btn btn-primary" href="https://carolinamawad.github.io/See-It-Hear-It-Say-It-/" target="_blank" rel="noopener">
+        🚀 Open Resource
+      </a>
+    </div>
+    <div class="resource-preview">
+      <iframe
+        src="https://carolinamawad.github.io/See-It-Hear-It-Say-It-/"
+        title="See It Hear It Say It - Interactive Resource"
+        sandbox="allow-scripts allow-same-origin allow-forms">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- LabINNOVA Table -->
+  <div class="essay-container">
+    <div class="essay-header">
+      <div>
+        <h3 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;">ANNEX 4 · LabINNOVA Planning and Checking Form</h3>
+        <p style="color:var(--muted);font-size:0.82rem;margin-top:0.3rem;">Innovation and Excellence Laboratory · Universidad Nacional Abierta y a Distancia</p>
+      </div>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="labinnova-table">
+        <thead>
+          <tr>
+            <th style="width:3rem;">#</th>
+            <th style="width:11rem;">Item Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="item-num">1</td>
+            <td class="item-name">Name of Resource</td>
+            <td>See It, Hear It, Say It! – An Interactive English Learning Resource for Young Learners</td>
+          </tr>
+          <tr>
+            <td class="item-num">2</td>
+            <td class="item-name">Type of Resource</td>
+            <td>Digital Educational Resource — designed to support young children's early English language development (ages 2–5) through three foundational skill areas: <strong style="color:var(--text);">Listening</strong> (recognizing familiar words, sounds, and simple instructions through songs, audio prompts, and repetition), <strong style="color:var(--text);">Speaking</strong> (repeating words, naming objects, and responding with single words or short phrases), and <strong style="color:var(--text);">Pre-writing / Motor Skills</strong> (tracing lines, shapes, and letters).</td>
+          </tr>
+          <tr>
+            <td class="item-num">3</td>
+            <td class="item-name">Problem to be Solved</td>
+            <td>Children between 2 and 5 years old who are beginning to learn English need engaging and developmentally appropriate experiences. At this stage, they are still developing attention span, motor skills, and basic language awareness. Traditional methods often focus too early on reading and writing, which can be frustrating. There is a need for playful, interactive resources that support early English exposure through listening, speaking, and exploration, making learning natural and enjoyable.</td>
+          </tr>
+          <tr>
+            <td class="item-num">4</td>
+            <td class="item-name">Purpose</td>
+            <td>To introduce English in a fun and engaging way, supporting early language development through listening, repetition, and play-based interaction.</td>
+          </tr>
+          <tr>
+            <td class="item-num">5</td>
+            <td class="item-name">Learning Objectives</td>
+            <td>By completing this resource, children (ages 2–5) will be able to: (1) <strong style="color:var(--text);">Listening</strong>: Recognize and respond to at least 5–8 familiar English words (colors, animals, objects). (2) <strong style="color:var(--text);">Speaking</strong>: Repeat or say simple words and short expressions with teacher support. (3) <strong style="color:var(--text);">Pre-writing</strong>: Trace basic lines, shapes, or letters and interact with visual elements on screen.</td>
+          </tr>
+          <tr>
+            <td class="item-num">6</td>
+            <td class="item-name">Academic Content</td>
+            <td>Early English exposure through familiar and meaningful topics: Colors · Animals · Everyday objects · Numbers. Content presented through songs, repetition, visuals, and simple interaction — not formal reading or writing tasks.</td>
+          </tr>
+          <tr>
+            <td class="item-num">7</td>
+            <td class="item-name">Multimedia Resources</td>
+            <td><strong style="color:var(--text);">Audios</strong>: Short, clear pronunciation clips, sound effects, and songs to promote listening and repetition. <strong style="color:var(--text);">Videos</strong>: Brief animated videos (15–30 sec) presenting vocabulary through movement, music, and repetition. <strong style="color:var(--text);">Images</strong>: Bright, colorful, age-appropriate illustrations of animals, objects, and colors. <strong style="color:var(--text);">Interactive Slides</strong>: Click, tap, and drag activities for matching images and exploring content. <strong style="color:var(--text);">Songs and Chants</strong>: Repetitive, rhythmic songs for participation, memory, and pronunciation. <strong style="color:var(--text);">Tracing Animations</strong>: Visual guides for tracing lines, shapes, or basic letters.</td>
+          </tr>
+          <tr>
+            <td class="item-num">8</td>
+            <td class="item-name">Learning Strategy</td>
+            <td>Play-based and gamified learning approach appropriate for early childhood education. Activities are short, visual, and interactive, promoting: attention and engagement · repetition and imitation · physical interaction (clicking, dragging, pointing) · early English oral production.</td>
+          </tr>
+          <tr>
+            <td class="item-num">9</td>
+            <td class="item-name">Learning Activities</td>
+            <td><strong style="color:var(--text);">Listen & Touch</strong>: Children hear a word and tap the correct image. <strong style="color:var(--text);">Repeat After Me</strong>: Children listen and repeat simple words. <strong style="color:var(--text);">Drag & Match</strong>: Match images (no reading required). <strong style="color:var(--text);">Trace & Play</strong>: Trace shapes or letters with visual guidance. <strong style="color:var(--text);">Sing Along</strong>: Short songs to reinforce vocabulary.</td>
+          </tr>
+          <tr>
+            <td class="item-num">10</td>
+            <td class="item-name">Feedback</td>
+            <td>Feedback is immediate, visual, and encouraging: sounds, animations, and stars reinforce participation. No penalties for mistakes. Teacher provides positive reinforcement and models correct pronunciation.</td>
+          </tr>
+          <tr>
+            <td class="item-num">11</td>
+            <td class="item-name">Interactivity</td>
+            <td>The resource promotes active participation through play, allowing children to: touch, drag, and explore · listen and repeat · engage physically and verbally. All activities are designed to match short attention spans and developmental needs.</td>
+          </tr>
+          <tr>
+            <td class="item-num">—</td>
+            <td class="item-name">Target Audience</td>
+            <td>Young learners aged 2 to 5 years old, at a Pre-A1 emergent level, in early childhood education settings (nursery, preschool, kindergarten).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Student Data -->
+  <div class="card-grid" style="margin-top:2rem;">
+    <div class="card">
+      <div class="card-icon">👩‍🎓</div>
+      <h3>Students</h3>
+      <p>Diana Carolina Acevedo Mouawd<br/>Richard Jesús Riaño Peña</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📖</div>
+      <h3>Bachelor's Degree</h3>
+      <p>Licenciatura en Lenguas Extranjeras con Énfasis en Inglés</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💻</div>
+      <h3>Course</h3>
+      <p>Technology in Foreign Language Teaching<br/>518006A_2201</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👩‍🏫</div>
+      <h3>Support Teacher</h3>
+      <p>Valeria María Eraso Ibarra</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p class="footer-title">Technology in <span class="footer-accent">Foreign Language Teaching</span></p>
+  <p>Diana Carolina Acevedo Mouawd · Richard Jesús Riaño Peña</p>
+  <p>Licenciatura en Lenguas Extranjeras con Énfasis en Inglés · UNAD · 2026</p>
+  <p style="margin-top:1rem;font-size:0.75rem;">Course 518006 · Support Teacher: Valeria María Eraso Ibarra</p>
+</footer>
+
+<script>
+  function switchTab(e, id) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+</body>
+</html>
